@@ -123,4 +123,5 @@ public ArrayList<Object[]> buscarInfracciones(String cedulaPlaca) {
     return listaObject;
 }
 
+
 }

@@ -56,6 +56,7 @@ public int insertarDatosBasicos(String placa, String articuloLiteral, java.util.
 }
 
 
+    ////////////////////////////////////////////////////////////////////////////////  OBTENER DATOS MULTAS //////////////////////////////////////////////////////////////////////////////////////////////
 
 
 public int obtenerIdVehiculoPorPlaca(String placa) throws SQLException {
@@ -64,7 +65,7 @@ public int obtenerIdVehiculoPorPlaca(String placa) throws SQLException {
         pstmt.setString(1, placa);
         try (ResultSet rs = pstmt.executeQuery()) {
             if (rs.next()) {
-                return rs.getInt("ID_VEHICULO"); // Retorna el ID del vehículo
+                return rs.getInt("ID_VEHICULO"); 
             } else {
                 throw new SQLException("No se encontró un vehículo con la placa proporcionada.");
             }
@@ -72,6 +73,44 @@ public int obtenerIdVehiculoPorPlaca(String placa) throws SQLException {
     }
 }
 
+
+ public String obtenerNombrePropietarioPorPlaca(String placa) {
+        String nombre = "";
+        String sql = "SELECT p.NOMBRES FROM propietario p JOIN vehiculo v ON p.CEDULA = v.CEDULA WHERE v.PLACA = ?";
+        
+        try (PreparedStatement pstmt = conectar.prepareStatement(sql)) {
+            pstmt.setString(1, placa);
+            ResultSet rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                nombre = rs.getString("NOMBRES");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return nombre;
+    }
+
+    public String obtenerCedulaPropietarioPorPlaca(String placa) {
+        String cedula = "";
+        String sql = "SELECT p.CEDULA FROM propietario p JOIN vehiculo v ON p.CEDULA = v.CEDULA WHERE v.PLACA = ?";
+        
+        try (PreparedStatement pstmt = conectar.prepareStatement(sql)) {
+            pstmt.setString(1, placa);
+            ResultSet rs = pstmt.executeQuery();
+            
+            if (rs.next()) {
+                cedula = rs.getString("CEDULA");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return cedula;
+    }
 
     //////////////////////////////////////////////////////////////////////////////// datosMultas ///////////////////////////////////////////////////////////////////////////////////////
 
