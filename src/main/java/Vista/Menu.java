@@ -1571,12 +1571,12 @@ private void buscarPuntosLicencia() {
 
         if (opcionSeleccionada == 0) {
 
-            String fileName = "reporte Clientes.pdf";
-            String titulo = "Reporte de Clientes de Geaturim";
+            String fileName = "reporte de Multas.pdf";
+            String titulo = "Reporte de Multas";
             Pdfs.generarPDF(jTableMultas, fileName, titulo);
         } else if (opcionSeleccionada == 1) {
             try {
-                String fileName = "reporte Clientes.pdf";
+                String fileName = "reporte de Multas.pdf";
                 File file = new File(fileName);
 
                 if (!Desktop.isDesktopSupported()) {
