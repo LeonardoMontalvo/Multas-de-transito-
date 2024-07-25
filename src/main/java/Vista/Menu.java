@@ -364,6 +364,9 @@ private MultasControlador multasControlador = new MultasControlador();
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPlacaMKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPlacaMKeyTyped(evt);
+            }
         });
         jPanel15.add(txtPlacaM, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 140, 30));
 
@@ -392,6 +395,11 @@ private MultasControlador multasControlador = new MultasControlador();
         txtTotalPagarM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTotalPagarMActionPerformed(evt);
+            }
+        });
+        txtTotalPagarM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTotalPagarMKeyReleased(evt);
             }
         });
         jPanel15.add(txtTotalPagarM, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, 90, 30));
@@ -1452,11 +1460,7 @@ private void buscarInfracciones() {
         FechaNotificacion.setDate(fechaNotificacion);
         FechaPago.setDate(fechaLimite);
         txtPuntosInfraccion.setText(puntosInfraccion.toPlainString());
-        
-        // Si deseas que txtTotalPagar en jTableInfraccion refleje el valor de txtTotalPagarM, debes obtener el valor desde txtTotalPagarM
-        txtTotalPagar.setText(txtTotalPagarM.getText()); // Asegúrate de que el formato sea compatible
-
-        // Rellenar txtIPlacaInfraccion con el valor de txtPlacaM
+        txtTotalPagar.setText(txtTotalPagarM.getText()); 
         txtIPlacaInfraccion.setText(txtPlacaM.getText());
     } else {
         // Mostrar un mensaje de error si no se ha seleccionado una fila
@@ -1538,28 +1542,24 @@ private void buscarPuntosLicencia() {
  DefaultTableModel modelo = (DefaultTableModel) jTableMultas.getModel();
     int selectedRow = jTableMultas.getSelectedRow();
 
-    // Obtener los valores de las celdas seleccionadas
     String placa = (String) modelo.getValueAt(selectedRow, 1);
     String articuloLiteral = (String) modelo.getValueAt(selectedRow, 2);
     Date fechaEmision = (Date) modelo.getValueAt(selectedRow, 3);
     String tipo = (String) modelo.getValueAt(selectedRow, 4);
     BigDecimal totalPagar = (BigDecimal) modelo.getValueAt(selectedRow, 5);
 
-    // Rellenar los campos de texto con los valores obtenidos
     txtPlacaM.setText(placa);
     txaArticuloLiteral.setText(articuloLiteral);
     FechaEmision.setDate(fechaEmision);
     cbbTipo.setSelectedItem(tipo);
-    txtTotalPagarM.setText(totalPagar.toPlainString()); // Convertir BigDecimal a String
+    txtTotalPagarM.setText(totalPagar.toPlainString()); 
 
-    // Crear una instancia del controlador de multas
+
     MultasControlador multasControlador = new MultasControlador();
 
-    // Obtener nombre y cédula del propietario por placa
         String nombre = multasControlador.obtenerNombrePropietarioPorPlaca(placa);
         String cedula = multasControlador.obtenerCedulaPropietarioPorPlaca(placa);
 
-    // Rellenar los campos de texto con nombre y cédula
     txtNombreM.setText(nombre);
     txtCedula.setText(cedula);
     }//GEN-LAST:event_jTableMultasMouseClicked
@@ -1604,7 +1604,6 @@ private void buscarPuntosLicencia() {
     String tipo = cbbTipo.getSelectedItem().toString();
     String totalPagar = txtTotalPagarM.getText();
     
-
     // Validar que los campos no estén vacíos
     if (placa.isEmpty() || articuloLiteral.isEmpty() || fechaEmisionDate == null || tipo.isEmpty()) {
         System.out.println("Campos vacíos detectados."); 
@@ -1627,17 +1626,23 @@ private void buscarPuntosLicencia() {
         int idMulta = multasControlador.insertarDatosBasicos(placa, articuloLiteral, fechaEmisionDate, tipo, totalPagarValue);
         System.out.println("ID de multa insertado: " + idMulta); 
 
-        // Cambiar a la segunda pestaña
-        jTabbedPane1.setSelectedIndex(2);
-
         // Establecer el ID de la multa en el controlador
         multasControlador.setIdMulta(idMulta);
 
+        // Cambiar a la segunda pestaña y actualizar los campos
+        txtIPlacaInfraccion.setText(txtPlacaM.getText());
+        txtTotalPagar.setText(txtTotalPagarM.getText());
+        
+        jTabbedPane1.setSelectedIndex(2);
+        
     } catch (SQLException e) {
         System.out.println("Error SQL al guardar los datos: " + e.getMessage()); // Para depuración
         JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + e.getMessage());
     }
     }//GEN-LAST:event_btnNuevaMultaActionPerformed
+
+    
+
 
     private void btnEliminarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCliActionPerformed
 
@@ -1759,7 +1764,7 @@ private void buscarMultas() {
     }//GEN-LAST:event_btnCuencaActionPerformed
 
     private void btnANTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnANTActionPerformed
- int filaSeleccionada = jTableMultas.getSelectedRow();
+     int filaSeleccionada = jTableMultas.getSelectedRow();
 
     if (filaSeleccionada == -1) {
         JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1780,7 +1785,7 @@ private void buscarMultas() {
     }
 
     // Aquí debes actualizar el estado de la multa en la base de datos
-    int idMulta = (int) jTableMultas.getValueAt(filaSeleccionada, 0); // Suponiendo que la columna de ID es la primera
+    int idMulta = (int) jTableMultas.getValueAt(filaSeleccionada, 1); // Suponiendo que la columna de ID es la primera
 
     try {
         // Supongamos que tienes un método en tu controlador para cambiar el estado
@@ -1788,7 +1793,7 @@ private void buscarMultas() {
         multaControlador.cambiarEstadoMulta(idMulta, "pagada");
 
         // Actualizar la tabla para reflejar el cambio
-        modeloInfraccion_Multas.setValueAt("Pagadas", filaSeleccionada, 5); // Actualizar el estado en la tabla
+        modeloInfraccion_Multas.setValueAt("Pagadas", filaSeleccionada, 4); // Actualizar el estado en la tabla
 
         JOptionPane.showMessageDialog(this, "El estado de la multa ha sido cambiado a pagada.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     } catch (SQLException e) {
@@ -1853,8 +1858,7 @@ private void buscarMultas() {
     }//GEN-LAST:event_cbbEntidadActionPerformed
 
     private void txtPlacaMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlacaMKeyReleased
-      
-    buscarDatosPorPlaca();
+      buscarDatosPorPlaca();
     }//GEN-LAST:event_txtPlacaMKeyReleased
 
     private void txtPlacaMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlacaMKeyPressed
@@ -1864,6 +1868,15 @@ private void buscarMultas() {
     private void txtCedulaLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaLKeyReleased
     buscarDatosPorCedula();
     }//GEN-LAST:event_txtCedulaLKeyReleased
+
+    private void txtPlacaMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlacaMKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlacaMKeyTyped
+
+    private void txtTotalPagarMKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalPagarMKeyReleased
+
+
+    }//GEN-LAST:event_txtTotalPagarMKeyReleased
 
 
 
@@ -2024,7 +2037,7 @@ public void limpiarTablaMultas() {
     
 private void buscarDatosPorPlaca() {
         String placa = txtPlacaM.getText().trim();
-
+            txtIPlacaInfraccion.setText(txtPlacaM.getText());
         if (placa.isEmpty()) {
             txtNombreM.setText(""); 
             txtCedula.setText(""); 
@@ -2098,6 +2111,8 @@ private void limpiarDetalleInfraccion() {
     txaArticuloLiteral.setText("");
     txtNombreM.setText("");
     txtCedula.setText("");
+    txtIPlacaInfraccion.setText("");
+    txtTotalPagar.setText("");
 }
 
 private void actualizarCedula() {
@@ -2109,6 +2124,11 @@ private void actualizarCedula() {
     
     txtCedula.setText(cedula);
 }
+
+private void eventoPago() {
+         txtTotalPagar.setText(txtTotalPagarM.getText());
+
+    }
 
 ///////////////////////////////////////////////////////////////TABLA  PUNTOS ////////////////////////////////////////////////////////////////////////////////// 
     
