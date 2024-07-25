@@ -34,7 +34,7 @@ public class Pdfs {
             document.open();
 
             // Agregar el logotipo al documento
-            Image logo = Image.getInstance("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\Logo.png");
+            Image logo = Image.getInstance("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\Logo_3.jpg");
             logo.scaleToFit(100, 100);
             logo.setAlignment(Element.ALIGN_LEFT);
             document.add(logo);

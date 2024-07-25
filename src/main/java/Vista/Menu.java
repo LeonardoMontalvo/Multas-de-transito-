@@ -98,7 +98,7 @@ private MultasControlador multasControlador = new MultasControlador();
         btnBuscarAbono = new javax.swing.JButton();
         jLabel67 = new javax.swing.JLabel();
         PDF4 = new javax.swing.JLabel();
-        btnPDFAbonos = new javax.swing.JButton();
+        btnPDFPuntos = new javax.swing.JButton();
         jLabel47 = new javax.swing.JLabel();
         jLabel66 = new javax.swing.JLabel();
         jPanel32 = new javax.swing.JPanel();
@@ -512,14 +512,14 @@ private MultasControlador multasControlador = new MultasControlador();
         PDF4.setText("PDF : ");
         jPanel19.add(PDF4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 60, -1));
 
-        btnPDFAbonos.setBackground(new java.awt.Color(187, 187, 187));
-        btnPDFAbonos.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\PDF.png")); // NOI18N
-        btnPDFAbonos.addActionListener(new java.awt.event.ActionListener() {
+        btnPDFPuntos.setBackground(new java.awt.Color(187, 187, 187));
+        btnPDFPuntos.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\PDF.png")); // NOI18N
+        btnPDFPuntos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPDFAbonosActionPerformed(evt);
+                btnPDFPuntosActionPerformed(evt);
             }
         });
-        jPanel19.add(btnPDFAbonos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 40, 40));
+        jPanel19.add(btnPDFPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 40, 40));
 
         jLabel47.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(0, 0, 0));
@@ -1471,37 +1471,43 @@ private void actualizarTotalPagar() {
 
     }//GEN-LAST:event_jPanel19MouseClicked
 
-    private void btnPDFAbonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFAbonosActionPerformed
-//        String[] opciones = {"Crear PDF", "Abrir PDF"};
-//        int opcionSeleccionada = JOptionPane.showOptionDialog(null, "¿Qué deseas hacer?", "Opciones", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
-//
-//        if (opcionSeleccionada == 0) {
-//
-//            String fileName = "reporte Abonos.pdf";
-//            String titulo = "Reporte de Abonos de Geaturim";
-//            Pdfs.generarPDF(jTableAbono, fileName, titulo);
-//        } else if (opcionSeleccionada == 1) {
-//            try {
-//                String fileName = "reporte Abonos.pdf";
-//                File file = new File(fileName);
-//
-//                if (!Desktop.isDesktopSupported()) {
-//                    JOptionPane.showMessageDialog(null, "El sistema no soporta la apertura automática de archivos.", "Error", JOptionPane.ERROR_MESSAGE);
-//                    return;
-//                }
-//
-//                Desktop desktop = Desktop.getDesktop();
-//
-//                if (file.exists() && file.isFile()) {
-//                    desktop.open(file);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "El archivo PDF no existe o no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
-//                }
-//            } catch (Exception ex) {
-//                JOptionPane.showMessageDialog(null, "Error al intentar abrir el archivo PDF: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
-    }//GEN-LAST:event_btnPDFAbonosActionPerformed
+    private void btnPDFPuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFPuntosActionPerformed
+        String nombrePropietario = buscarDatosPorCedula();
+
+    if (nombrePropietario == null || nombrePropietario.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No se encontró el propietario para la cédula ingresada.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    String[] opciones = {"Crear PDF", "Abrir PDF"};
+    int opcionSeleccionada = JOptionPane.showOptionDialog(null, "¿Qué deseas hacer?", "Opciones", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+    if (opcionSeleccionada == 0) {
+        String fileName = "reporte_Puntos.pdf";
+        String titulo = "Reporte de Puntos de " + nombrePropietario;
+        Pdfs.generarPDF(jTablePuntos, fileName, titulo);
+    } else if (opcionSeleccionada == 1) {
+        try {
+            String fileName = "reporte_Puntos.pdf";
+            File file = new File(fileName);
+
+            if (!Desktop.isDesktopSupported()) {
+                JOptionPane.showMessageDialog(null, "El sistema no soporta la apertura automática de archivos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Desktop desktop = Desktop.getDesktop();
+
+            if (file.exists() && file.isFile()) {
+                desktop.open(file);
+            } else {
+                JOptionPane.showMessageDialog(null, "El archivo PDF no existe o no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al intentar abrir el archivo PDF: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_btnPDFPuntosActionPerformed
 
     private void btnBuscarAbonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAbonoActionPerformed
     buscarPuntosLicencia();
@@ -2121,19 +2127,21 @@ private void limpiarDatosPropietario() {
     lblLicencias.setText(""); // Limpiar las licencias
 }
    
-public void buscarDatosPorCedula() {
+public String buscarDatosPorCedula() {
     String cedula = txtCedulaL.getText().trim();
 
     if (cedula.isEmpty()) {
         lblNombres.setText(""); 
         lblPuntos.setText("");
         lblLicencias.setText(""); 
-        return;
+        return null;
     }
 
     Connection conectar = null;
     PreparedStatement ejecutar = null;
     ResultSet res = null;
+
+    String nombrePropietario = null;
 
     try {
         ConexionBDD parametros = new ConexionBDD();
@@ -2155,17 +2163,17 @@ public void buscarDatosPorCedula() {
             lblNombres.setText(nombres);
             lblPuntos.setText(puntos);
             lblLicencias.setText(licencias);
+
+            nombrePropietario = nombres; // Guardar el nombre del propietario
         } else {
             lblNombres.setText(""); 
             lblPuntos.setText(""); 
             lblLicencias.setText(""); 
-            
         }
     } catch (SQLException e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Error al buscar los datos: " + e.getMessage());
     } finally {
-        // Cerrar recursos
         try {
             if (res != null) res.close();
             if (ejecutar != null) ejecutar.close();
@@ -2174,6 +2182,7 @@ public void buscarDatosPorCedula() {
             e.printStackTrace();
         }
     }
+    return nombrePropietario;
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2199,9 +2208,9 @@ public void buscarDatosPorCedula() {
     private javax.swing.JButton btnMultas;
     private javax.swing.JButton btnNuevaInfraccion;
     private javax.swing.JButton btnNuevaMulta;
-    private javax.swing.JButton btnPDFAbonos;
     private javax.swing.JButton btnPDFClientes;
     private javax.swing.JButton btnPDFContrato;
+    private javax.swing.JButton btnPDFPuntos;
     private javax.swing.JButton btnPago;
     private javax.swing.JButton btnPuntos;
     private javax.swing.JButton btnSantoDomingo;
