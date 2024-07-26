@@ -121,7 +121,7 @@ private MultasControlador multasControlador = new MultasControlador();
         jPanel38 = new javax.swing.JPanel();
         jLabel56 = new javax.swing.JLabel();
         btnBuscarInfraccion = new javax.swing.JButton();
-        btnEditarContrato = new javax.swing.JButton();
+        btnEditarInfraccion = new javax.swing.JButton();
         btnEliminarContrato = new javax.swing.JButton();
         btnNuevaInfraccion = new javax.swing.JButton();
         jLabel35 = new javax.swing.JLabel();
@@ -727,14 +727,14 @@ private MultasControlador multasControlador = new MultasControlador();
         });
         jPanelContratos.add(btnBuscarInfraccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, 40, 35));
 
-        btnEditarContrato.setBackground(new java.awt.Color(204, 204, 204));
-        btnEditarContrato.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\Modificar.png")); // NOI18N
-        btnEditarContrato.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarInfraccion.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditarInfraccion.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\Modificar.png")); // NOI18N
+        btnEditarInfraccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarContratoActionPerformed(evt);
+                btnEditarInfraccionActionPerformed(evt);
             }
         });
-        jPanelContratos.add(btnEditarContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 40, 40));
+        jPanelContratos.add(btnEditarInfraccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 40, 40));
 
         btnEliminarContrato.setBackground(new java.awt.Color(204, 204, 204));
         btnEliminarContrato.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\eliminar.png")); // NOI18N
@@ -1363,50 +1363,51 @@ private int calcularPuntosARestar() {
     return puntosARestar; 
     }//GEN-LAST:event_btnNuevaInfraccionActionPerformed
 
-    private void btnEditarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarContratoActionPerformed
-//        int filaSeleccionada = jTableContrato.getSelectedRow();
-//
-//        if (filaSeleccionada >= 0) {
-//            try {
-//                DefaultTableModel modelo = (DefaultTableModel) jTableContrato.getModel();
-//
-//                int contratoId = Integer.parseInt(modelo.getValueAt(filaSeleccionada, 0).toString());
-//
-//                String nuevaPlaca = cbbPlacas.getSelectedItem().toString();
-//                String nuevaCedulaCliente = cbbCliente.getSelectedItem().toString();
-//                String nuevoDestino = txtDestino.getText();
-//                Date nuevaFecha = FeachaContrato.getDate();
-//                String nuevoConductor = txtConductor1.getText();
-//                int nuevosDias = Integer.parseInt(txtDias.getText());
-//                int nuevosAsientos = Integer.parseInt(txtAsientos.getText());
-//
-//                java.sql.Date sqlNuevaFecha = new java.sql.Date(nuevaFecha.getTime());
-//
-//                ContratoControlador controlador = new ContratoControlador();
-//                boolean exito = controlador.editarContrato(contratoId, nuevaPlaca, nuevaCedulaCliente, nuevoDestino, sqlNuevaFecha, nuevoConductor, nuevosDias, nuevosAsientos);
-//
-//                if (exito) {
-//                    modelo.setValueAt(nuevaPlaca, filaSeleccionada, 1);
-//                    modelo.setValueAt(nuevaCedulaCliente, filaSeleccionada, 2);
-//                    modelo.setValueAt(nuevoDestino, filaSeleccionada, 3);
-//                    modelo.setValueAt(nuevaFecha, filaSeleccionada, 4);
-//                    modelo.setValueAt(nuevoConductor, filaSeleccionada, 5);
-//                    modelo.setValueAt(nuevosDias, filaSeleccionada, 6);
-//                    modelo.setValueAt(nuevosAsientos, filaSeleccionada, 7);
-//
-//                    JOptionPane.showMessageDialog(null, "Contrato editado con éxito.");
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Error al editar el contrato.");
-//                }
-//            } catch (NumberFormatException e) {
-//                JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos para días y asientos.");
-//            } catch (Exception e) {
-//                JOptionPane.showMessageDialog(null, "Error al editar el contrato: " + e.getMessage());
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Seleccione una fila para editar.");
-//        }
-    }//GEN-LAST:event_btnEditarContratoActionPerformed
+    private void btnEditarInfraccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarInfraccionActionPerformed
+  int filaSeleccionada = jTableInfraccion.getSelectedRow();
+
+    if (filaSeleccionada >= 0) {
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) jTableInfraccion.getModel();
+
+            int idMulta = Integer.parseInt(modelo.getValueAt(filaSeleccionada, 0).toString());
+            String nuevaEntidad = (String) cbbEntidad.getSelectedItem();
+            String nuevaCitacion = txtCitacion.getText();
+            java.util.Date nuevaFechaNotificacion = FechaNotificacion.getDate();
+            java.util.Date nuevaFechaLimite = FechaPago.getDate();
+            int nuevosPuntosARestar = calcularPuntosARestar();
+
+            if (nuevaEntidad == null || nuevaEntidad.isEmpty() || nuevaCitacion.isEmpty() || nuevaFechaNotificacion == null || nuevaFechaLimite == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
+                return;
+            }
+
+            java.sql.Date sqlNuevaFechaNotificacion = new java.sql.Date(nuevaFechaNotificacion.getTime());
+            java.sql.Date sqlNuevaFechaLimite = new java.sql.Date(nuevaFechaLimite.getTime());
+
+            InfraccionControlador infraccionControlador = new InfraccionControlador();
+            boolean exito = infraccionControlador.editarDatosAdicionales(idMulta, nuevaEntidad, nuevaCitacion, sqlNuevaFechaNotificacion, sqlNuevaFechaLimite, nuevosPuntosARestar);
+
+            if (exito) {
+                modelo.setValueAt(nuevaEntidad, filaSeleccionada, 1);
+                modelo.setValueAt(nuevaCitacion, filaSeleccionada, 2);
+                modelo.setValueAt(nuevaFechaNotificacion, filaSeleccionada, 3);
+                modelo.setValueAt(nuevaFechaLimite, filaSeleccionada, 4);
+                modelo.setValueAt(nuevosPuntosARestar, filaSeleccionada, 5);
+
+                JOptionPane.showMessageDialog(this, "Infracción editada con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al editar la infracción.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numéricos válidos.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al editar la infracción: " + e.getMessage());
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una fila para editar.");
+    }
+    }//GEN-LAST:event_btnEditarInfraccionActionPerformed
 
     private void btnBuscarInfraccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInfraccionActionPerformed
 buscarInfracciones();
@@ -2221,7 +2222,7 @@ public String buscarDatosPorCedula() {
     private javax.swing.JButton btnCTE;
     private javax.swing.JButton btnCuenca;
     private javax.swing.JButton btnEditarCli;
-    private javax.swing.JButton btnEditarContrato;
+    private javax.swing.JButton btnEditarInfraccion;
     private javax.swing.JButton btnEliminarCli;
     private javax.swing.JButton btnEliminarContrato;
     private javax.swing.JButton btnInfraccion;

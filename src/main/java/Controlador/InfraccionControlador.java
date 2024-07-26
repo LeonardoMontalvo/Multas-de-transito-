@@ -123,5 +123,25 @@ public ArrayList<Object[]> buscarInfracciones(String cedulaPlaca) {
     return listaObject;
 }
 
+    /////////////////////////////////////////////////////////////////////////////////////// EDITAR  ///////////////////////////////////////////////////////////////////////////////////////
+
+
+public boolean editarDatosAdicionales(int idMulta, String entidad, String citacion, java.sql.Date fechaNotificacion, java.sql.Date fechaLimite, int puntosARestar) throws SQLException {
+    String sql = "{CALL actualizarDatosAdicionales(?, ?, ?, ?, ?, ?)}";
+    try (CallableStatement cstmt = conectar.prepareCall(sql)) {
+        cstmt.setInt(1, idMulta);
+        cstmt.setString(2, entidad);
+        cstmt.setString(3, citacion);
+        cstmt.setDate(4, fechaNotificacion);
+        cstmt.setDate(5, fechaLimite);
+        cstmt.setInt(6, puntosARestar);
+        cstmt.executeUpdate();
+        return true;
+    } catch (SQLException e) {
+        System.out.println("Error al editar los datos adicionales: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    }
+}
 
 }
