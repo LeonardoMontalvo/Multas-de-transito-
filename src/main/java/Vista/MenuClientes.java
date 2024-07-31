@@ -1681,42 +1681,42 @@ private void buscarMultas() {
     }//GEN-LAST:event_btnCuencaActionPerformed
 
     private void btnANTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnANTActionPerformed
- int filaSeleccionada = jTableMultas.getSelectedRow();
-
-    if (filaSeleccionada == -1) {
-        JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    String entidad = (String) jTableMultas.getValueAt(filaSeleccionada, 1);
-    String estado = (String) jTableMultas.getValueAt(filaSeleccionada, 5);
-
-    if (!"Pagar multas ANT".equals(entidad)) {
-        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad ANT.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    if (!"pendiente".equalsIgnoreCase(estado)) {
-        JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    // Aquí debes actualizar el estado de la multa en la base de datos
-    int idMulta = (int) jTableMultas.getValueAt(filaSeleccionada, 0); // Suponiendo que la columna de ID es la primera
-
-    try {
-        // Supongamos que tienes un método en tu controlador para cambiar el estado
-        MultasControlador multaControlador = new MultasControlador();
-        multaControlador.cambiarEstadoMulta(idMulta, "pagada");
-
-        // Actualizar la tabla para reflejar el cambio
-        modeloInfraccion_Multas.setValueAt("Pagadas", filaSeleccionada, 5); // Actualizar el estado en la tabla
-
-        JOptionPane.showMessageDialog(this, "El estado de la multa ha sido cambiado a pagada.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al actualizar el estado de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }        
+// int filaSeleccionada = jTableMultas.getSelectedRow();
+//
+//    if (filaSeleccionada == -1) {
+//        JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
+//        return;
+//    }
+//
+//    String entidad = (String) jTableMultas.getValueAt(filaSeleccionada, 1);
+//    String estado = (String) jTableMultas.getValueAt(filaSeleccionada, 5);
+//
+//    if (!"Pagar multas ANT".equals(entidad)) {
+//        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad ANT.", "Error", JOptionPane.ERROR_MESSAGE);
+//        return;
+//    }
+//
+//    if (!"pendiente".equalsIgnoreCase(estado)) {
+//        JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
+//        return;
+//    }
+//
+//    // Aquí debes actualizar el estado de la multa en la base de datos
+//    int idMulta = (int) jTableMultas.getValueAt(filaSeleccionada, 0); // Suponiendo que la columna de ID es la primera
+//
+//    try {
+//        // Supongamos que tienes un método en tu controlador para cambiar el estado
+//        MultasControlador multaControlador = new MultasControlador();
+//        multaControlador.cambiarEstadoMulta(idMulta, "pagada");
+//
+//        // Actualizar la tabla para reflejar el cambio
+//        modeloInfraccion_Multas.setValueAt("Pagadas", filaSeleccionada, 5); // Actualizar el estado en la tabla
+//
+//        JOptionPane.showMessageDialog(this, "El estado de la multa ha sido cambiado a pagada.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+//    } catch (SQLException e) {
+//        JOptionPane.showMessageDialog(this, "Error al actualizar el estado de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        e.printStackTrace();
+//    }        
     }//GEN-LAST:event_btnANTActionPerformed
 
     private void txtTotalPagarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalPagarMActionPerformed

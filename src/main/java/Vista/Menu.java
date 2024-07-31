@@ -16,12 +16,14 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-
 import Modelo.Pdfs;
 import Modelo.Propietario;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -65,13 +67,11 @@ private MultasControlador multasControlador = new MultasControlador();
         jLabel50 = new javax.swing.JLabel();
         jPanel33 = new javax.swing.JPanel();
         btnBuscarmultas = new javax.swing.JButton();
-        btnEditarCli = new javax.swing.JButton();
-        btnEliminarCli = new javax.swing.JButton();
+        btnEditarMultas = new javax.swing.JButton();
         btnNuevaMulta = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
         PDF1 = new javax.swing.JLabel();
         btnPDFClientes = new javax.swing.JButton();
         jLabel80 = new javax.swing.JLabel();
@@ -263,25 +263,16 @@ private MultasControlador multasControlador = new MultasControlador();
                 btnBuscarmultasActionPerformed(evt);
             }
         });
-        jPanel15.add(btnBuscarmultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, 40, 35));
+        jPanel15.add(btnBuscarmultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, 40, 35));
 
-        btnEditarCli.setBackground(new java.awt.Color(204, 204, 204));
-        btnEditarCli.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\Modificar.png")); // NOI18N
-        btnEditarCli.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarMultas.setBackground(new java.awt.Color(204, 204, 204));
+        btnEditarMultas.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\Modificar.png")); // NOI18N
+        btnEditarMultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarCliActionPerformed(evt);
+                btnEditarMultasActionPerformed(evt);
             }
         });
-        jPanel15.add(btnEditarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 40, 40));
-
-        btnEliminarCli.setBackground(new java.awt.Color(204, 204, 204));
-        btnEliminarCli.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\eliminar.png")); // NOI18N
-        btnEliminarCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCliActionPerformed(evt);
-            }
-        });
-        jPanel15.add(btnEliminarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 40, 35));
+        jPanel15.add(btnEditarMultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 40, 40));
 
         btnNuevaMulta.setBackground(new java.awt.Color(204, 204, 204));
         btnNuevaMulta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\nuevo.png")); // NOI18N
@@ -294,23 +285,19 @@ private MultasControlador multasControlador = new MultasControlador();
 
         jLabel31.setForeground(new java.awt.Color(0, 0, 0));
         jLabel31.setText("Buscar");
-        jPanel15.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 70, -1));
+        jPanel15.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 70, -1));
 
         jLabel32.setForeground(new java.awt.Color(0, 0, 0));
         jLabel32.setText("Editar");
-        jPanel15.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 40, -1));
+        jPanel15.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 40, -1));
 
         jLabel33.setForeground(new java.awt.Color(0, 0, 0));
         jLabel33.setText("Nuevo");
         jPanel15.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 60, -1));
 
-        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel34.setText("Eliminar");
-        jPanel15.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 60, -1));
-
         PDF1.setForeground(new java.awt.Color(0, 0, 0));
         PDF1.setText("PDF : ");
-        jPanel15.add(PDF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 60, -1));
+        jPanel15.add(PDF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 490, 60, -1));
 
         btnPDFClientes.setBackground(new java.awt.Color(187, 187, 187));
         btnPDFClientes.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Geaturim\\src\\main\\resource\\Imagenes\\PDF.png")); // NOI18N
@@ -319,7 +306,7 @@ private MultasControlador multasControlador = new MultasControlador();
                 btnPDFClientesActionPerformed(evt);
             }
         });
-        jPanel15.add(btnPDFClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 470, 40, 40));
+        jPanel15.add(btnPDFClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 480, 40, 40));
 
         jLabel80.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel80.setForeground(new java.awt.Color(0, 0, 0));
@@ -417,7 +404,7 @@ private MultasControlador multasControlador = new MultasControlador();
 
         jPanel15.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 320, 90));
 
-        cbbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendientes", "Anuladas", "Pagadas" }));
+        cbbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Anulado" }));
         cbbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbTipoActionPerformed(evt);
@@ -616,15 +603,15 @@ private MultasControlador multasControlador = new MultasControlador();
         jPanel36.setLayout(jPanel36Layout);
         jPanel36Layout.setHorizontalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 190, Short.MAX_VALUE)
         );
         jPanel36Layout.setVerticalGroup(
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        jPanel19.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 100, 2));
-        jPanel19.add(lblLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 50, 30));
+        jPanel19.add(jPanel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 190, 2));
+        jPanel19.add(lblLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 190, 30));
 
         jTablePuntos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1277,10 +1264,10 @@ private MultasControlador multasControlador = new MultasControlador();
     private void btnInfraccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfraccionActionPerformed
         limpiarDetalleInfraccion();
         limpiarTablaInfraccion();
-       setModeloInfraccion();
         jTabbedPane1.setSelectedIndex(2);
-        setModeloInfraccion();
         limpiarTablaInfraccion();
+        limpiarDetalleInfraccion();
+
 
     }//GEN-LAST:event_btnInfraccionActionPerformed
 
@@ -1445,26 +1432,20 @@ private void buscarInfracciones() {
    DefaultTableModel modelo = (DefaultTableModel) jTableInfraccion.getModel();
     int selectedRow = jTableInfraccion.getSelectedRow();
 
-    // Asegurarse de que se ha seleccionado una fila
     if (selectedRow != -1) {
-        // Obtener los valores de las celdas seleccionadas
         String entidad = (String) modelo.getValueAt(selectedRow, 1);
         String citacion = (String) modelo.getValueAt(selectedRow, 2);
         Date fechaNotificacion = (Date) modelo.getValueAt(selectedRow, 3);
         Date fechaLimite = (Date) modelo.getValueAt(selectedRow, 4);
-        BigDecimal puntosInfraccion = (BigDecimal) modelo.getValueAt(selectedRow, 5);
         BigDecimal totalPagar = (BigDecimal) modelo.getValueAt(selectedRow, 6);
 
-        // Rellenar los campos de texto con los valores obtenidos
         cbbEntidad.setSelectedItem(entidad);
         txtCitacion.setText(citacion);
         FechaNotificacion.setDate(fechaNotificacion);
         FechaPago.setDate(fechaLimite);
-        txtPuntosInfraccion.setText(puntosInfraccion.toPlainString());
         txtTotalPagar.setText(txtTotalPagarM.getText()); 
         txtIPlacaInfraccion.setText(txtPlacaM.getText());
     } else {
-        // Mostrar un mensaje de error si no se ha seleccionado una fila
         JOptionPane.showMessageDialog(this, "Por favor, seleccione una fila.");
     }
     }//GEN-LAST:event_jTableInfraccionMouseClicked
@@ -1605,14 +1586,12 @@ private void buscarPuntosLicencia() {
     String tipo = cbbTipo.getSelectedItem().toString();
     String totalPagar = txtTotalPagarM.getText();
     
-    // Validar que los campos no estén vacíos
     if (placa.isEmpty() || articuloLiteral.isEmpty() || fechaEmisionDate == null || tipo.isEmpty()) {
         System.out.println("Campos vacíos detectados."); 
         JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos del primer formulario.");
         return;
     }
 
-    // Validar que totalPagar sea un número
     double totalPagarValue;
     try {
         totalPagarValue = Double.parseDouble(totalPagar);
@@ -1623,14 +1602,11 @@ private void buscarPuntosLicencia() {
     }
 
     try {
-        // Insertar datos básicos y obtener el ID de la multa
         int idMulta = multasControlador.insertarDatosBasicos(placa, articuloLiteral, fechaEmisionDate, tipo, totalPagarValue);
         System.out.println("ID de multa insertado: " + idMulta); 
 
-        // Establecer el ID de la multa en el controlador
         multasControlador.setIdMulta(idMulta);
 
-        // Cambiar a la segunda pestaña y actualizar los campos
         txtIPlacaInfraccion.setText(txtPlacaM.getText());
         txtTotalPagar.setText(txtTotalPagarM.getText());
         
@@ -1642,74 +1618,54 @@ private void buscarPuntosLicencia() {
     }
     }//GEN-LAST:event_btnNuevaMultaActionPerformed
 
+    private void btnEditarMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMultasActionPerformed
+    int filaSeleccionada = jTableMultas.getSelectedRow();
+    if (filaSeleccionada == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione una multa de la tabla para editar.");
+        return;
+    }
+
+    String placa = (String) jTableMultas.getValueAt(filaSeleccionada, 1);
+    String articuloLiteral = (String) jTableMultas.getValueAt(filaSeleccionada, 2);
+    java.sql.Date fechaEmision = (java.sql.Date) jTableMultas.getValueAt(filaSeleccionada, 3);
+
+    String nuevoArticuloLiteral = txaArticuloLiteral.getText();
+    java.util.Date nuevaFechaEmisionDate = FechaEmision.getDate();
+    String nuevoTipo = cbbTipo.getSelectedItem().toString();
+    String nuevoTotalPagar = txtTotalPagarM.getText();
     
+    if (nuevoArticuloLiteral.isEmpty() || nuevaFechaEmisionDate == null || nuevoTipo.isEmpty()) {
+        System.out.println("Campos vacíos detectados."); 
+        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos del formulario.");
+        return;
+    }
 
+    double nuevoTotalPagarValue;
+    try {
+        nuevoTotalPagarValue = Double.parseDouble(nuevoTotalPagar);
+    } catch (NumberFormatException e) {
+        System.out.println("Error en el campo 'Total a Pagar': no es un número válido.");
+        JOptionPane.showMessageDialog(this, "El campo 'Total a Pagar' debe ser un número válido.");
+        return;
+    }
 
-    private void btnEliminarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCliActionPerformed
-
-//        int filaSeleccionada = jTableMultas.getSelectedRow();
-//
-//        if (filaSeleccionada >= 0) {
-//            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este cliente?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-//
-//            if (confirmacion == JOptionPane.YES_OPTION) {
-//                DefaultTableModel modelo = (DefaultTableModel) jTableMultas.getModel();
-//                String nombre = modelo.getValueAt(filaSeleccionada, 1).toString();
-//                String apellido = modelo.getValueAt(filaSeleccionada, 2).toString();
-//                String telefono = modelo.getValueAt(filaSeleccionada, 3).toString();
-//                String cedula = modelo.getValueAt(filaSeleccionada, 4).toString();
-//                String direccion = modelo.getValueAt(filaSeleccionada, 5).toString();
-//
-//                ClienteControlador clienteControlador = new ClienteControlador();
-//                clienteControlador.eliminarCliente(nombre, apellido, telefono, cedula, direccion);
-//
-//                modelo.removeRow(filaSeleccionada);
-//
-//                // Actualizar el JComboBox de clientes
-//                mostrarListaClientesCedula();
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar");
-//        }
-    }//GEN-LAST:event_btnEliminarCliActionPerformed
-
-    private void btnEditarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCliActionPerformed
-//        int filaSeleccionada = jTableMultas.getSelectedRow();
-//
-//        if (filaSeleccionada >= 0) {
-//            DefaultTableModel modelo = (DefaultTableModel) jTableMultas.getModel();
-//            String cedulaAntigua = modelo.getValueAt(filaSeleccionada, 4).toString();
-//            String nombreAntiguo = modelo.getValueAt(filaSeleccionada, 1).toString();
-//            String apellidoAntiguo = modelo.getValueAt(filaSeleccionada, 2).toString();
-//            String telefonoAntiguo = modelo.getValueAt(filaSeleccionada, 3).toString();
-//            String direccionAntigua = modelo.getValueAt(filaSeleccionada, 5).toString();
-//
-//            String nuevoNombre = txtNombreM.getText();
-//            String nuevoApellido = txtApellidoC.getText();
-//            String nuevoTelefono = txtTelefono.getText();
-//            String nuevaCedula = txtCedulaM.getText();
-//            String nuevaDireccion = txtDireccion.getText();
-//
-//            if (nuevoNombre.isEmpty() || nuevoApellido.isEmpty() || nuevoTelefono.isEmpty() || nuevaCedula.isEmpty() || nuevaDireccion.isEmpty()) {
-//                JOptionPane.showMessageDialog(null, "Ingrese nuevos valores para todos los campos");
-//            } else {
-//                ClienteControlador clienteControlador = new ClienteControlador();
-//                clienteControlador.editarCliente(cedulaAntigua, nuevoNombre, nuevoApellido, nuevoTelefono, nuevaCedula, nuevaDireccion);
-//
-//                // Actualizar la tabla de clientes
-//                modelo.setValueAt(nuevoNombre, filaSeleccionada, 1);
-//                modelo.setValueAt(nuevoApellido, filaSeleccionada, 2);
-//                modelo.setValueAt(nuevoTelefono, filaSeleccionada, 3);
-//                modelo.setValueAt(nuevaCedula, filaSeleccionada, 4);
-//                modelo.setValueAt(nuevaDireccion, filaSeleccionada, 5);
-//
-//                // Actualizar el JComboBox de clientes
-//                mostrarListaClientesCedula();
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Seleccione una fila para editar");
-//        }
-    }//GEN-LAST:event_btnEditarCliActionPerformed
+    try {
+        boolean exito = multasControlador.actualizarDatosMultaPorCriterios(placa, articuloLiteral, fechaEmision, nuevoArticuloLiteral, nuevaFechaEmisionDate, nuevoTipo, nuevoTotalPagarValue);
+        
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Multa actualizada con éxito.");
+            jTableMultas.setValueAt(nuevoArticuloLiteral, filaSeleccionada, 2);
+            jTableMultas.setValueAt(new java.sql.Date(nuevaFechaEmisionDate.getTime()), filaSeleccionada, 3);
+            jTableMultas.setValueAt(nuevoTipo, filaSeleccionada, 4);
+            jTableMultas.setValueAt(nuevoTotalPagarValue, filaSeleccionada, 5);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al editar la multa. Verifique los datos e intente nuevamente.");
+        }
+    } catch (SQLException e) {
+        System.out.println("Error SQL al actualizar los datos: " + e.getMessage()); 
+        JOptionPane.showMessageDialog(this, "Error al actualizar los datos: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnEditarMultasActionPerformed
 
     private void btnBuscarmultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarmultasActionPerformed
 buscarMultas();
@@ -1733,11 +1689,11 @@ private void buscarMultas() {
     ArrayList<Object[]> resultados = multasControlador.buscarMultas(cedulaPlaca);
 
     DefaultTableModel modelo = (DefaultTableModel) jTableMultas.getModel();
-    modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevas filas
+    modelo.setRowCount(0); 
 
     if (resultados != null && !resultados.isEmpty()) {
         for (Object[] fila : resultados) {
-            modelo.addRow(fila); // Agregar cada fila de resultados a la tabla
+            modelo.addRow(fila); 
         }
     } else {
         JOptionPane.showMessageDialog(null, "No se encontraron multas para la cédula o placa ingresada.");
@@ -1745,62 +1701,206 @@ private void buscarMultas() {
 }
 
     private void txtPlacaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaMActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtPlacaMActionPerformed
 
     private void btnCTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCTEActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCTEActionPerformed
-
-    private void btnATMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnATMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnATMActionPerformed
-
-    private void btnSantoDomingoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSantoDomingoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSantoDomingoActionPerformed
-
-    private void btnCuencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuencaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCuencaActionPerformed
-
-    private void btnANTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnANTActionPerformed
-     int filaSeleccionada = jTableMultas.getSelectedRow();
+    int filaSeleccionada = jTableInfraccion.getSelectedRow();
 
     if (filaSeleccionada == -1) {
         JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
+    String entidad = (String) jTableInfraccion.getValueAt(filaSeleccionada, 1); 
+    String tipo = (String) jTableMultas.getValueAt(filaSeleccionada, 4); 
 
-    String entidad = (String) jTableMultas.getValueAt(filaSeleccionada, 1);
-    String estado = (String) jTableMultas.getValueAt(filaSeleccionada, 5);
-
-    if (!"Pagar multas ANT".equals(entidad)) {
-        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad ANT.", "Error", JOptionPane.ERROR_MESSAGE);
+    if (!"Pagar multas CTE / Comisión de Tránsito del Ecuador".equals(entidad)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad CTE / Comisión de Tránsito.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    if (!"pendiente".equalsIgnoreCase(estado)) {
+    if (!"pendiente".equalsIgnoreCase(tipo)) {
         JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    // Aquí debes actualizar el estado de la multa en la base de datos
-    int idMulta = (int) jTableMultas.getValueAt(filaSeleccionada, 1); // Suponiendo que la columna de ID es la primera
+    int idMulta = (int) jTableInfraccion.getValueAt(filaSeleccionada, 0); 
 
     try {
-        // Supongamos que tienes un método en tu controlador para cambiar el estado
         MultasControlador multaControlador = new MultasControlador();
-        multaControlador.cambiarEstadoMulta(idMulta, "pagada");
+        multaControlador.cambiarTipoMulta(idMulta, "Pagado");
 
-        // Actualizar la tabla para reflejar el cambio
-        modeloInfraccion_Multas.setValueAt("Pagadas", filaSeleccionada, 4); // Actualizar el estado en la tabla
+        modeloInfraccion_Multas.setValueAt("Pagado", filaSeleccionada, 4); 
+        try {
+            Desktop.getDesktop().browse(new URI("https://servicios.axiscloud.ec/AutoServicio/inicio.jsp?ps_empresa=16&ps_accion=P55"));
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(this, "Error al abrir el enlace: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
 
-        JOptionPane.showMessageDialog(this, "El estado de la multa ha sido cambiado a pagada.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al actualizar el estado de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Error al actualizar el tipo de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         e.printStackTrace();
-    }        
+        }        
+    }//GEN-LAST:event_btnCTEActionPerformed
+
+    private void btnATMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnATMActionPerformed
+         int filaSeleccionada = jTableInfraccion.getSelectedRow();
+
+    if (filaSeleccionada == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    String entidad = (String) jTableInfraccion.getValueAt(filaSeleccionada, 1); 
+    String tipo = (String) jTableMultas.getValueAt(filaSeleccionada, 4); 
+
+    if (!"Pagar multas ATM / Guayaquil".equals(entidad)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad  ATM / Guayaquil.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (!"pendiente".equalsIgnoreCase(tipo)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int idMulta = (int) jTableInfraccion.getValueAt(filaSeleccionada, 0); 
+
+    try {
+        MultasControlador multaControlador = new MultasControlador();
+        multaControlador.cambiarTipoMulta(idMulta, "Pagado");
+
+        modeloInfraccion_Multas.setValueAt("Pagado", filaSeleccionada, 4); 
+        try {
+            Desktop.getDesktop().browse(new URI("https://www.atm.gob.ec"));
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(this, "Error al abrir el enlace: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar el tipo de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+        } 
+    }//GEN-LAST:event_btnATMActionPerformed
+
+    private void btnSantoDomingoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSantoDomingoActionPerformed
+        int filaSeleccionada = jTableInfraccion.getSelectedRow();
+
+    if (filaSeleccionada == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    String entidad = (String) jTableInfraccion.getValueAt(filaSeleccionada, 1); 
+    String tipo = (String) jTableMultas.getValueAt(filaSeleccionada, 4); 
+
+    if (!"Pagar multas Santo Domingo".equals(entidad)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad Pagar multas Santo Domingo.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (!"pendiente".equalsIgnoreCase(tipo)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int idMulta = (int) jTableInfraccion.getValueAt(filaSeleccionada, 0); 
+
+    try {
+        MultasControlador multaControlador = new MultasControlador();
+        multaControlador.cambiarTipoMulta(idMulta, "Pagado");
+
+        modeloInfraccion_Multas.setValueAt("Pagado", filaSeleccionada, 4); 
+        try {
+            Desktop.getDesktop().browse(new URI("https://consultasecuador.com/pagos/producto/multas-transito-sto-domingo"));
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(this, "Error al abrir el enlace: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar el tipo de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+        }  
+    }//GEN-LAST:event_btnSantoDomingoActionPerformed
+
+    private void btnCuencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuencaActionPerformed
+       int filaSeleccionada = jTableInfraccion.getSelectedRow();
+
+    if (filaSeleccionada == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    String entidad = (String) jTableInfraccion.getValueAt(filaSeleccionada, 1); 
+    String tipo = (String) jTableMultas.getValueAt(filaSeleccionada, 4); 
+
+    if (!"Pagar multas EMOV EP - Cuenca".equals(entidad)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad EMOV EP - Cuenca.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (!"pendiente".equalsIgnoreCase(tipo)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int idMulta = (int) jTableInfraccion.getValueAt(filaSeleccionada, 0); 
+
+    try {
+        MultasControlador multaControlador = new MultasControlador();
+        multaControlador.cambiarTipoMulta(idMulta, "Pagado");
+
+        modeloInfraccion_Multas.setValueAt("Pagado", filaSeleccionada, 4); 
+        try {
+            Desktop.getDesktop().browse(new URI("https://webcliente.emov.gob.ec:8444/#/consultaDeudas"));
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(this, "Error al abrir el enlace: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar el tipo de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+        }  
+    }//GEN-LAST:event_btnCuencaActionPerformed
+
+    private void btnANTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnANTActionPerformed
+  int filaSeleccionada = jTableInfraccion.getSelectedRow();
+
+    if (filaSeleccionada == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    String entidad = (String) jTableInfraccion.getValueAt(filaSeleccionada, 1); 
+    String tipo = (String) jTableMultas.getValueAt(filaSeleccionada, 4); 
+
+    if (!"Pagar multas ANT / Policía Nacional".equals(entidad)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad ANT / Policía Nacional.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (!"pendiente".equalsIgnoreCase(tipo)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int idMulta = (int) jTableInfraccion.getValueAt(filaSeleccionada, 0); 
+
+    try {
+        MultasControlador multaControlador = new MultasControlador();
+        multaControlador.cambiarTipoMulta(idMulta, "Pagado");
+
+        modeloInfraccion_Multas.setValueAt("Pagado", filaSeleccionada, 4); 
+        try {
+            Desktop.getDesktop().browse(new URI("https://sites.placetopay.ec/ant/login"));
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(this, "Error al abrir el enlace: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar el tipo de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+        }        
     }//GEN-LAST:event_btnANTActionPerformed
 
     private void txtTotalPagarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalPagarMActionPerformed
@@ -1820,7 +1920,43 @@ private void buscarMultas() {
     }//GEN-LAST:event_txtCitacionActionPerformed
 
     private void btnAmbatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbatoActionPerformed
-        // TODO add your handling code here:
+int filaSeleccionada = jTableInfraccion.getSelectedRow();
+
+    if (filaSeleccionada == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    String entidad = (String) jTableInfraccion.getValueAt(filaSeleccionada, 1); 
+    String tipo = (String) jTableMultas.getValueAt(filaSeleccionada, 4); 
+
+    if (!"Pagar multas Ambato".equals(entidad)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no corresponde a la entidad ANT / Policía Nacional.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    if (!"pendiente".equalsIgnoreCase(tipo)) {
+        JOptionPane.showMessageDialog(this, "La multa seleccionada no está en estado pendiente.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int idMulta = (int) jTableInfraccion.getValueAt(filaSeleccionada, 0); 
+
+    try {
+        MultasControlador multaControlador = new MultasControlador();
+        multaControlador.cambiarTipoMulta(idMulta, "Pagado");
+
+        modeloInfraccion_Multas.setValueAt("Pagado", filaSeleccionada, 4); 
+        try {
+            Desktop.getDesktop().browse(new URI("https://gadmatic.ambato.gob.ec/WsPlaceToPlay/"));
+        } catch (IOException | URISyntaxException e) {
+            JOptionPane.showMessageDialog(this, "Error al abrir el enlace: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar el tipo de la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+        }  
     }//GEN-LAST:event_btnAmbatoActionPerformed
 
     private void txtPuntosInfraccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuntosInfraccionActionPerformed
@@ -1828,26 +1964,33 @@ private void buscarMultas() {
     }//GEN-LAST:event_txtPuntosInfraccionActionPerformed
 
     private void btnEliminarContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarContratoActionPerformed
-//        int filaSeleccionada = jTableContrato.getSelectedRow();
-//
-//        if (filaSeleccionada >= 0) {
-//            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este contrato?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
-//
-//            if (confirmacion == JOptionPane.YES_OPTION) {
-//                DefaultTableModel modelo = (DefaultTableModel) jTableContrato.getModel();
-//                Date fecha = (Date) modelo.getValueAt(filaSeleccionada, 4);
-//
-//                String numeroPlaca = (String) modelo.getValueAt(filaSeleccionada, 1);
-//                String cedulaCliente = (String) modelo.getValueAt(filaSeleccionada, 2);
-//
-//                ContratoControlador contratoControlador = new ContratoControlador();
-//                contratoControlador.eliminarContrato((java.sql.Date) fecha, numeroPlaca, cedulaCliente);
-//
-//                modelo.removeRow(filaSeleccionada);
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar");
-//        }
+    int filaSeleccionada = jTableInfraccion.getSelectedRow();
+
+    if (filaSeleccionada >= 0) {
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar esta multa?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            try {
+                DefaultTableModel modelo = (DefaultTableModel) jTableInfraccion.getModel();
+                int idMulta = Integer.parseInt(modelo.getValueAt(filaSeleccionada, 0).toString());
+
+                MultasControlador controlador = new MultasControlador();
+                boolean exito = controlador.eliminarMulta(idMulta);
+
+                if (exito) {
+                    modelo.removeRow(filaSeleccionada);
+                    JOptionPane.showMessageDialog(this, "Multa eliminada con éxito.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al eliminar la multa. Intente nuevamente.");
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al eliminar la multa: " + e.getMessage());
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una fila para eliminar.");
+        }
     }//GEN-LAST:event_btnEliminarContratoActionPerformed
 
     private void jTablePuntosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePuntosMouseClicked
@@ -1987,7 +2130,7 @@ public void setModeloPropietario() {
 
 public void mostrarDatosPuntosLicencia(Propietario puntosLicencia) {
     DefaultTableModel modelo = (DefaultTableModel) jTablePuntos.getModel();
-    Object[] fila = new Object[3]; // Ajusta el tamaño del arreglo según el número de columnas
+    Object[] fila = new Object[3]; 
     fila[0] = puntosLicencia.getNombres();
     fila[1] = puntosLicencia.getPuntos(); 
     fila[2] = puntosLicencia.getLicencias(); 
@@ -2050,7 +2193,6 @@ private void buscarDatosPorPlaca() {
         ResultSet res = null;
 
         try {
-            // Establecer conexión
             ConexionBDD parametros = new ConexionBDD();
             conectar = parametros.conectar();
             
@@ -2112,7 +2254,6 @@ private void limpiarDetalleInfraccion() {
     txaArticuloLiteral.setText("");
     txtNombreM.setText("");
     txtCedula.setText("");
-    txtIPlacaInfraccion.setText("");
     txtTotalPagar.setText("");
 }
 
@@ -2143,9 +2284,9 @@ private void eventoPago() {
     
 private void limpiarDatosPropietario() {
     txtCedulaL.setText("");
-    lblNombres.setText(""); // Limpiar el nombre
-    lblPuntos.setText(""); // Limpiar los puntos
-    lblLicencias.setText(""); // Limpiar las licencias
+    lblNombres.setText(""); 
+    lblPuntos.setText(""); 
+    lblLicencias.setText("");
 }
    
 public String buscarDatosPorCedula() {
@@ -2185,7 +2326,7 @@ public String buscarDatosPorCedula() {
             lblPuntos.setText(puntos);
             lblLicencias.setText(licencias);
 
-            nombrePropietario = nombres; // Guardar el nombre del propietario
+            nombrePropietario = nombres;
         } else {
             lblNombres.setText(""); 
             lblPuntos.setText(""); 
@@ -2221,9 +2362,8 @@ public String buscarDatosPorCedula() {
     private javax.swing.JButton btnBuscarmultas;
     private javax.swing.JButton btnCTE;
     private javax.swing.JButton btnCuenca;
-    private javax.swing.JButton btnEditarCli;
     private javax.swing.JButton btnEditarInfraccion;
-    private javax.swing.JButton btnEliminarCli;
+    private javax.swing.JButton btnEditarMultas;
     private javax.swing.JButton btnEliminarContrato;
     private javax.swing.JButton btnInfraccion;
     private javax.swing.JButton btnMultas;
@@ -2248,7 +2388,6 @@ public String buscarDatosPorCedula() {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;

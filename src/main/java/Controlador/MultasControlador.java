@@ -20,6 +20,7 @@ public class MultasControlador {
     Connection conectar = parametros.conectar();
     PreparedStatement ejecutar;
     ResultSet res;
+    
     private int idMulta;
 
 
@@ -34,11 +35,11 @@ public class MultasControlador {
     ////////////////////////////////////////////////////////////////////////////////  INSERTAR MULTAS //////////////////////////////////////////////////////////////////////////////////////////////
 
 public int insertarDatosBasicos(String placa, String articuloLiteral, java.util.Date fechaEmisionDate, String tipo, double totalPagar) throws SQLException {
-    int idVehiculo = obtenerIdVehiculoPorPlaca(placa); // Obtén el idVehiculo usando la placa
+    int idVehiculo = obtenerIdVehiculoPorPlaca(placa); 
 
     String sqlInsert = "INSERT INTO infraccion_multas (ID_VEHICULO, ArticuloLiteral, Fecha_Emision, Tipo, Total_Pagar) VALUES (?, ?, ?, ?, ?)";
     try (PreparedStatement pstmt = conectar.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS)) {
-        pstmt.setInt(1, idVehiculo); // Usa el idVehiculo en lugar de placa
+        pstmt.setInt(1, idVehiculo); 
         pstmt.setString(2, articuloLiteral);
         pstmt.setDate(3, new java.sql.Date(fechaEmisionDate.getTime()));
         pstmt.setString(4, tipo);
@@ -47,7 +48,7 @@ public int insertarDatosBasicos(String placa, String articuloLiteral, java.util.
 
         try (ResultSet rs = pstmt.getGeneratedKeys()) {
             if (rs.next()) {
-                return rs.getInt(1); // Obtén el ID de la multa generada
+                return rs.getInt(1); 
             } else {
                 throw new SQLException("No se pudo obtener el ID de la multa.");
             }
@@ -170,21 +171,52 @@ public ArrayList<Object[]> buscarMultas(String cedulaPlaca) {
     return listaObject;
 }
 
-    public void cambiarEstadoMulta(int idMulta, String nuevoEstado) throws SQLException {
-        String sql = "UPDATE infraccion_multas SET estado = ? WHERE id_infraccion = ?";
+    
+    public void cambiarTipoMulta(int idMulta, String nuevoTipo) throws SQLException {
+    String sql = "UPDATE infraccion_multas SET Tipo = ? WHERE INFRACCION = ?";
         try (PreparedStatement ejecutar = conectar.prepareStatement(sql)) {
-            ejecutar.setString(1, nuevoEstado);
-            ejecutar.setInt(2, idMulta);
-
-            int filasActualizadas = ejecutar.executeUpdate();
-            if (filasActualizadas > 0) {
-                System.out.println("El estado de la multa ha sido actualizado correctamente.");
-            } else {
-                System.out.println("No se encontró la multa con el ID especificado.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        ejecutar.setString(1, nuevoTipo);
+        ejecutar.setInt(2, idMulta);
+        ejecutar.executeUpdate();
     }
+}
+
+    
+        /////////////////////////////////////////////////////////////////////////////////////// EDITAR Multas  ///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+public boolean eliminarMulta(int idMulta) {
+    String sqlDeleteMulta = "DELETE FROM infraccion_multas WHERE INFRACCION = ?";
+    try (PreparedStatement pstmtMulta = conectar.prepareStatement(sqlDeleteMulta)) {
+        pstmtMulta.setInt(1, idMulta);
+        int filasAfectadas = pstmtMulta.executeUpdate();
+        return filasAfectadas > 0;
+    } catch (SQLException e) {
+        System.out.println("Error SQL al eliminar la multa: " + e.getMessage());
+        return false;
+    }
+}
+
+
+
+public boolean actualizarDatosMultaPorCriterios(String placa, String articuloLiteral, java.sql.Date fechaEmision, String nuevoArticuloLiteral, java.util.Date nuevaFechaEmisionDate, String nuevoTipo, double nuevoTotalPagar) throws SQLException {
+    int idVehiculo = obtenerIdVehiculoPorPlaca(placa); 
+
+    String sqlUpdate = "UPDATE infraccion_multas SET ArticuloLiteral = ?, Fecha_Emision = ?, Tipo = ?, Total_Pagar = ? WHERE ID_VEHICULO = ? AND ArticuloLiteral = ? AND Fecha_Emision = ?";
+    try (PreparedStatement pstmt = conectar.prepareStatement(sqlUpdate)) {
+        pstmt.setString(1, nuevoArticuloLiteral);
+        pstmt.setDate(2, new java.sql.Date(nuevaFechaEmisionDate.getTime()));
+        pstmt.setString(3, nuevoTipo);
+        pstmt.setDouble(4, nuevoTotalPagar);
+        pstmt.setInt(5, idVehiculo);
+        pstmt.setString(6, articuloLiteral);
+        pstmt.setDate(7, fechaEmision);
+
+        int filasAfectadas = pstmt.executeUpdate();
+        return filasAfectadas > 0;
+    }
+}
+
+
 }

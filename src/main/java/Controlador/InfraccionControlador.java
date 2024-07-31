@@ -50,7 +50,6 @@ public int obtenerIdPropietarioPorMulta(int idMulta) throws SQLException {
     }
 
 
-
     public void insertarDatosAdicionales(int idMulta, String entidad, String citacion, java.util.Date fechaNotificacion, java.util.Date fechaLimite, int puntosARestar) throws SQLException {
         String sql = "{CALL actualizarDatosAdicionales(?, ?, ?, ?, ?, ?)}";
         try (CallableStatement cstmt = conectar.prepareCall(sql)) {
@@ -143,5 +142,6 @@ public boolean editarDatosAdicionales(int idMulta, String entidad, String citaci
         return false;
     }
 }
+
 
 }
