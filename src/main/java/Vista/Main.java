@@ -9,12 +9,12 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // Crear y mostrar la ventana de login
-//                Login login = new Login();
-//                login.setVisible(true);
-//                MenuClientes menuc = new MenuClientes();
-//                menuc.setVisible(true);
-                 Menu menu = new Menu();
-                 menu.setVisible(true);
+//                 Login login = new Login();
+//                 login.setVisible(true);
+                   MenuClientes menuc = new MenuClientes();
+                   menuc.setVisible(true);
+//                 Menu menu = new Menu();
+//                 menu.setVisible(true);
             }
         });
     }
