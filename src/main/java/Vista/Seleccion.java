@@ -17,6 +17,8 @@ public class Seleccion extends javax.swing.JFrame {
      */
     public Seleccion() {
         initComponents();
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -98,10 +100,10 @@ public class Seleccion extends javax.swing.JFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
     String codigo = JOptionPane.showInputDialog("Ingrese el código de verificación:");
-        if ("1004076186".equals(codigo)) {
+        if ("1".equals(codigo)) {
             Login login = new Login();
             login.setVisible(true);
-            Seleccion.this.dispose(); // Cerrar la ventana actual
+            Seleccion.this.dispose(); 
         } else {
             JOptionPane.showMessageDialog(null, "Código de verificación incorrecto");
             }

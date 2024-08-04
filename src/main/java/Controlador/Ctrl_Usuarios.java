@@ -41,8 +41,8 @@ public class Ctrl_Usuarios {
     private static final String Algoritmo="AES";
     String original_valor ="mi_clave_oculta";
     // Variables para el envio de correo
-    private static String remitente="pablo200.a@gmail.com";
-    private static String clave_remitente="cphw xycm eoej mncu"; 
+    private static String remitente="soporte.tecnico2619@gmail.com";
+    private static String clave_remitente="bsqh wdhg seez jpnk"; 
     public static String destinatario;
     private String emailTo;
     private String titulo;
@@ -125,7 +125,7 @@ public class Ctrl_Usuarios {
         
         usuarios.setPassword(encriptacion);
         if(consulta_Usuarios.Login(usuarios)){
-            JOptionPane.showMessageDialog(null, "Logeo Exitoso. Bienvenido "+user);
+            JOptionPane.showMessageDialog(null, "Bienvenido "+user);
             return true;
         }
         else{
