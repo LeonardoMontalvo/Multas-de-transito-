@@ -42,11 +42,9 @@ public class Menu extends javax.swing.JFrame {
         actualizarTotalPagar();
         actualizarCedula();
         setModeloMultas();
-        
         setModeloInfraccion();
-        
         setModeloPropietario();
-        
+        limpiarTablaMultas();
     }
 
 private MultasControlador multasControlador = new MultasControlador();

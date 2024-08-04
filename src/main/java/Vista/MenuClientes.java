@@ -41,9 +41,12 @@ public class MenuClientes extends javax.swing.JFrame {
         initComponents();
         actualizarTotalPagar();
         actualizarCedula();
+        
         setModeloMultas();
         setModeloInfraccion();
         setModeloPropietario();
+        limpiarTablaMultas();
+
     }
 
 private MultasControlador multasControlador = new MultasControlador();
