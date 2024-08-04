@@ -6,7 +6,7 @@ import Controlador.InfraccionControlador;
 import Controlador.MultasControlador;
 import Controlador.PuntosControlador;
 import Modelo.Infraccion_Multas;
-import Modelo.Usuario;
+import Modelo.Usuarios;
 import Modelo.Vehiculo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
