@@ -11,6 +11,7 @@ package com.mycompany.multas;
 public class Multas {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Login l = new  Login();
+        l.setVisible(true);
     }
 }
