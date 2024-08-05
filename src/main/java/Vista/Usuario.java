@@ -7,6 +7,7 @@ package Vista;
 import Controlador.Ctrl_Usuarios;
 import Modelo.Consulta_Usuarios;
 import Modelo.Usuarios;
+import java.util.Set;
 
 /**
  *
@@ -37,65 +38,106 @@ public class Usuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnregistrar = new javax.swing.JButton();
         btnvolver = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         txtcorreo = new javax.swing.JTextField();
-        Contraseña = new javax.swing.JLabel();
-        txtcontrasenia = new javax.swing.JTextField();
+        jCheckBoxContra1 = new javax.swing.JCheckBox();
+        txtcontrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(229, 240, 238));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Rockwell Condensed", 0, 18)); // NOI18N
-        jLabel1.setText("REGISTRO");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 200, -1));
+        jLabel1.setFont(new java.awt.Font("Rockwell Condensed", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Registrarte");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 140, 40));
 
+        btnregistrar.setBackground(new java.awt.Color(229, 240, 238));
         btnregistrar.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
-        btnregistrar.setText("Registrar");
+        btnregistrar.setForeground(new java.awt.Color(0, 0, 0));
+        btnregistrar.setText("Registrarte");
         btnregistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnregistrarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(417, 146, -1, -1));
+        jPanel2.add(btnregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
 
+        btnvolver.setBackground(new java.awt.Color(229, 240, 238));
         btnvolver.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12)); // NOI18N
-        btnvolver.setText("Volver");
+        btnvolver.setForeground(new java.awt.Color(229, 240, 238));
+        btnvolver.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\cancel_exit_wrong_icon_190495.png")); // NOI18N
         btnvolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnvolverActionPerformed(evt);
             }
         });
-        jPanel2.add(btnvolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(445, 463, -1, -1));
+        jPanel2.add(btnvolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 40, 30));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel2.setText("Nombre de usuario");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 127, -1));
-        jPanel2.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 120, -1));
+        txtusuario.setBackground(new java.awt.Color(229, 240, 238));
+        txtusuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtusuario.setForeground(new java.awt.Color(0, 0, 0));
+        txtusuario.setText("Nombre de usuario");
+        txtusuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtusuarioMouseClicked(evt);
+            }
+        });
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 220, 30));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel3.setText("Correo");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 59, -1));
-        jPanel2.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 120, -1));
+        txtcorreo.setBackground(new java.awt.Color(229, 240, 238));
+        txtcorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtcorreo.setForeground(new java.awt.Color(0, 0, 0));
+        txtcorreo.setText("Correo electrónico");
+        txtcorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtcorreoMouseReleased(evt);
+            }
+        });
+        txtcorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcorreoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 220, 30));
 
-        Contraseña.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        Contraseña.setText("Contraseña");
-        jPanel2.add(Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 83, -1));
-        jPanel2.add(txtcontrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 120, -1));
+        jCheckBoxContra1.setBackground(new java.awt.Color(229, 240, 238));
+        jCheckBoxContra1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        jCheckBoxContra1.setForeground(new java.awt.Color(0, 0, 0));
+        jCheckBoxContra1.setText("Mostrar contraseña");
+        jCheckBoxContra1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jCheckBoxContra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxContra1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jCheckBoxContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 190, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 520));
+        txtcontrasenia.setBackground(new java.awt.Color(229, 240, 238));
+        txtcontrasenia.setForeground(new java.awt.Color(0, 0, 0));
+        txtcontrasenia.setText("Contraseña nueva");
+        txtcontrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtcontraseniaMouseClicked(evt);
+            }
+        });
+        jPanel2.add(txtcontrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 220, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 530));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,6 +170,37 @@ public class Usuario extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnvolverActionPerformed
+
+    private void txtusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtusuarioMouseClicked
+        // TODO add your handling code here:
+         txtusuario.setText("");
+    }//GEN-LAST:event_txtusuarioMouseClicked
+
+    private void txtcorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcorreoActionPerformed
+
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioActionPerformed
+
+    private void txtcorreoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtcorreoMouseReleased
+         txtcorreo.setText("");
+    }//GEN-LAST:event_txtcorreoMouseReleased
+
+    private void jCheckBoxContra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxContra1ActionPerformed
+        if ( jCheckBoxContra1.isSelected()) {
+
+            txtcontrasenia.setEchoChar((char) 0);
+        } else {
+
+            txtcontrasenia.setEchoChar('•');
+        }
+    }//GEN-LAST:event_jCheckBoxContra1ActionPerformed
+
+    private void txtcontraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtcontraseniaMouseClicked
+        txtcontrasenia.setText("");
+    }//GEN-LAST:event_txtcontraseniaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -166,15 +239,13 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Contraseña;
     private javax.swing.JButton btnregistrar;
     private javax.swing.JButton btnvolver;
+    private javax.swing.JCheckBox jCheckBoxContra1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtcontrasenia;
+    private javax.swing.JPasswordField txtcontrasenia;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables

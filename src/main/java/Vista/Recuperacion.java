@@ -20,6 +20,8 @@ public class Recuperacion extends javax.swing.JFrame {
     public Recuperacion() {
         initComponents();
         setLocationRelativeTo(null);
+         txtenvio.setVisible(false);
+        lblContra.setVisible(false);
 
     }
 
@@ -34,66 +36,88 @@ public class Recuperacion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lblContra = new javax.swing.JLabel();
         txtenvio = new javax.swing.JTextField();
         btnenviar = new javax.swing.JButton();
         btnvolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(229, 240, 238));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Rockwell Condensed", 1, 18)); // NOI18N
-        jLabel1.setText("RECUPERACION");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 6, 126, -1));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("RECUPERA TU CONTRASEÑA");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 260, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel2.setText("Ingrese su usuario para la recuperacion");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 34, 254, -1));
-        jPanel1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 56, 254, -1));
+        txtusuario.setBackground(new java.awt.Color(229, 240, 238));
+        txtusuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtusuario.setForeground(new java.awt.Color(0, 0, 0));
+        txtusuario.setText("Ingrese su usuario para la recuperación");
+        txtusuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtusuarioMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtusuarioMouseExited(evt);
+            }
+        });
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 270, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel3.setText("Su clave se envio al correo");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 101, 172, -1));
+        lblContra.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        lblContra.setForeground(new java.awt.Color(0, 0, 0));
+        lblContra.setText("Su contraseña se ah enviado al correo:");
+        jPanel1.add(lblContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 240, -1));
 
-        txtenvio.setBackground(new java.awt.Color(242, 242, 242));
-        jPanel1.add(txtenvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 96, 210, -1));
+        txtenvio.setBackground(new java.awt.Color(229, 240, 238));
+        txtenvio.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(txtenvio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 280, -1));
 
+        btnenviar.setBackground(new java.awt.Color(229, 240, 238));
+        btnenviar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnenviar.setForeground(new java.awt.Color(0, 0, 0));
         btnenviar.setText("Enviar");
         btnenviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnenviarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 136, -1, -1));
+        jPanel1.add(btnenviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 100, 30));
 
-        btnvolver.setText("Salir");
+        btnvolver.setBackground(new java.awt.Color(229, 240, 238));
+        btnvolver.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\cancel_exit_wrong_icon_190495.png")); // NOI18N
         btnvolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnvolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btnvolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 136, -1, -1));
+        jPanel1.add(btnvolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 40, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
-        // TODO add your handling code here:
-         Usuarios usuarios = new Usuarios();
+        Usuarios usuarios = new Usuarios();
         Consulta_Usuarios consulta_Usuarios = new Consulta_Usuarios();
         String user;
         user=this.txtusuario.getText();
@@ -102,6 +126,8 @@ public class Recuperacion extends javax.swing.JFrame {
         if(ctrl.Enviar(user)){
             this.txtusuario.setText("");
             this.txtenvio.setText(ctrl.destinatario);
+            txtenvio.setVisible(true);
+            lblContra.setVisible(true);
         }
     }//GEN-LAST:event_btnenviarActionPerformed
 
@@ -111,6 +137,18 @@ public class Recuperacion extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnvolverActionPerformed
+
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusuarioActionPerformed
+
+    private void txtusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtusuarioMouseClicked
+        txtusuario.setText("");
+    }//GEN-LAST:event_txtusuarioMouseClicked
+
+    private void txtusuarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtusuarioMouseExited
+//        txtusuario.setText("");
+    }//GEN-LAST:event_txtusuarioMouseExited
 
     /**
      * @param args the command line arguments
@@ -152,9 +190,8 @@ public class Recuperacion extends javax.swing.JFrame {
     private javax.swing.JButton btnenviar;
     private javax.swing.JButton btnvolver;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblContra;
     private javax.swing.JTextField txtenvio;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables

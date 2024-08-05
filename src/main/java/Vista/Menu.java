@@ -169,6 +169,7 @@ private MultasControlador multasControlador = new MultasControlador();
         lblLogo = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
+        btnvolver = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -1157,7 +1158,7 @@ private MultasControlador multasControlador = new MultasControlador();
 
         tipo.setForeground(new java.awt.Color(255, 255, 255));
 
-        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\logo_3.jpg")); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\logo_3-removebg-preview.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1174,7 +1175,7 @@ private MultasControlador multasControlador = new MultasControlador();
                     .addComponent(btnInfraccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMultas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPuntos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(tipo)
                 .addContainerGap())
         );
@@ -1205,20 +1206,37 @@ private MultasControlador multasControlador = new MultasControlador();
         jLabel38.setForeground(new java.awt.Color(0, 0, 0));
         jLabel38.setText("Consultar multas ANT por placa o cédula - Ecuador");
 
+        btnvolver.setBackground(new java.awt.Color(229, 240, 238));
+        btnvolver.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12)); // NOI18N
+        btnvolver.setForeground(new java.awt.Color(229, 240, 238));
+        btnvolver.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\cancel_exit_wrong_icon_190495.png")); // NOI18N
+        btnvolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(318, Short.MAX_VALUE)
+                .addContainerGap(280, Short.MAX_VALUE)
                 .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 1152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(18, 18, 18)
+                .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addContainerGap())
         );
 
@@ -2020,6 +2038,12 @@ int filaSeleccionada = jTableInfraccion.getSelectedRow();
 
     }//GEN-LAST:event_txtTotalPagarMKeyReleased
 
+    private void btnvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolverActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnvolverActionPerformed
+
 
 
     /**
@@ -2373,6 +2397,7 @@ public String buscarDatosPorCedula() {
     private javax.swing.JButton btnPago;
     private javax.swing.JButton btnPuntos;
     private javax.swing.JButton btnSantoDomingo;
+    private javax.swing.JButton btnvolver;
     private javax.swing.JComboBox<String> cbbEntidad;
     private javax.swing.JComboBox<String> cbbTipo;
     private javax.swing.JDesktopPane jDesktopPane1;

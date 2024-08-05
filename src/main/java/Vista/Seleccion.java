@@ -49,7 +49,7 @@ public class Seleccion extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 560, 230));
 
-        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\logo_3.jpg")); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\logo_3-removebg-preview.png")); // NOI18N
         jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -110,8 +110,9 @@ public class Seleccion extends javax.swing.JFrame {
         }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnConsultarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarMActionPerformed
-  MenuClientes menuc = new MenuClientes();
+        MenuClientes menuc = new MenuClientes();
         menuc.setVisible(true);
+        dispose();
         
     }//GEN-LAST:event_btnConsultarMActionPerformed
     

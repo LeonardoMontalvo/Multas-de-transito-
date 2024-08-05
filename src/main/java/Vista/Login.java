@@ -47,6 +47,7 @@ public class Login extends javax.swing.JFrame {
         jPanel29 = new javax.swing.JPanel();
         txtusuario = new javax.swing.JTextField();
         jCheckBoxContra1 = new javax.swing.JCheckBox();
+        btnvolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,7 +64,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Rockwell Condensed", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("BIENVENIDO A LA AGENCIA NACIONAL DE TRANSITO");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
@@ -85,6 +86,11 @@ public class Login extends javax.swing.JFrame {
         txtPassword.setBackground(new java.awt.Color(229, 240, 238));
         txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(0, 0, 0));
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 200, -1));
 
         btniniciar.setBackground(new java.awt.Color(229, 240, 238));
@@ -132,7 +138,9 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(btnregistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 150, 30));
 
-        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\logo_3.jpg")); // NOI18N
+        lblLogo.setBackground(new java.awt.Color(229, 240, 238));
+        lblLogo.setForeground(new java.awt.Color(229, 240, 238));
+        lblLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\logo_3-removebg-preview.png")); // NOI18N
         jPanel1.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel29.setBackground(new java.awt.Color(0, 0, 0));
@@ -184,15 +192,26 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(jCheckBoxContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 190, -1));
 
+        btnvolver.setBackground(new java.awt.Color(229, 240, 238));
+        btnvolver.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12)); // NOI18N
+        btnvolver.setForeground(new java.awt.Color(229, 240, 238));
+        btnvolver.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\cancel_exit_wrong_icon_190495.png")); // NOI18N
+        btnvolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnvolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 40, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
         );
 
         pack();
@@ -211,6 +230,8 @@ public class Login extends javax.swing.JFrame {
             this.txtPassword.setText("");
             Menu menu = new Menu();
             menu.setVisible(true);
+           dispose();
+            
         }
     }//GEN-LAST:event_btniniciarActionPerformed
 
@@ -265,6 +286,17 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPanel1MouseExited
 
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void btnvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolverActionPerformed
+        // TODO add your handling code here:
+        Seleccion seleccion = new Seleccion();
+        seleccion.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnvolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -304,6 +336,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btniniciar;
     private javax.swing.JButton btnregistrarse;
+    private javax.swing.JButton btnvolver;
     private javax.swing.JCheckBox jCheckBoxContra1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
