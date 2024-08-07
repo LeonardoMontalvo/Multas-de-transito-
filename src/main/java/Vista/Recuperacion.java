@@ -7,6 +7,7 @@ package Vista;
 import Controlador.Ctrl_Usuarios;
 import Modelo.Consulta_Usuarios;
 import Modelo.Usuarios;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -117,17 +118,19 @@ public class Recuperacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
-        Usuarios usuarios = new Usuarios();
-        Consulta_Usuarios consulta_Usuarios = new Consulta_Usuarios();
-        String user;
-        user=this.txtusuario.getText();
-        Ctrl_Usuarios ctrl=new Ctrl_Usuarios(usuarios, consulta_Usuarios);
-        ctrl.Iniciar();
-        if(ctrl.Enviar(user)){
-            this.txtusuario.setText("");
-            this.txtenvio.setText(ctrl.destinatario);
-            txtenvio.setVisible(true);
-            lblContra.setVisible(true);
+         Usuarios usuarios = new Usuarios();
+    Consulta_Usuarios consulta_Usuarios = new Consulta_Usuarios();
+    String user = this.txtusuario.getText();
+    Ctrl_Usuarios ctrl = new Ctrl_Usuarios(usuarios, consulta_Usuarios);
+    ctrl.Iniciar();
+
+    if (ctrl.Enviar(user)) {
+        this.txtusuario.setText("");
+        this.txtenvio.setText(ctrl.destinatario);
+        txtenvio.setVisible(true);
+        lblContra.setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Verifique el nombre de usuario e inténtelo de nuevo...", "Error de Envío", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnenviarActionPerformed
 

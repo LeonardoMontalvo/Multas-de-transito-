@@ -10,6 +10,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Base64;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -191,4 +197,73 @@ public class Ctrl_Usuarios {
         
     }
         }
+    
+    public boolean validarCorreoEnBD(String correo) {
+     boolean isValid = false;
+     try (Connection conn = new ConexionBDD().conectar();
+          CallableStatement stmt = conn.prepareCall("{? = CALL validarCorreo(?)}")) {
+
+         stmt.registerOutParameter(1, Types.BOOLEAN);
+         stmt.setString(2, correo);
+         stmt.execute();
+         isValid = stmt.getBoolean(1);
+
+     } catch (SQLException e) {
+         System.out.println("ERROR SQL al validar correo: " + e.getMessage());
+         e.printStackTrace();
+     }
+
+     if (!isValid) {
+         JOptionPane.showMessageDialog(null, "El correo ingresado no es válido.", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+     }
+
+     return isValid;
+ }
+
+    public boolean usuarioExiste(String user) {
+         boolean existe = false;
+         String sql = "SELECT COUNT(*) FROM usuarios WHERE nombre_usuario = ?";
+
+         try (Connection conn = new ConexionBDD().conectar();
+              PreparedStatement stmt = conn.prepareStatement(sql)) {
+             stmt.setString(1, user);
+             ResultSet rs = stmt.executeQuery();
+
+             if (rs.next()) {
+                 existe = rs.getInt(1) > 0;
+             }
+         } catch (SQLException e) {
+             System.out.println("ERROR SQL al verificar usuario: " + e.getMessage());
+             e.printStackTrace();
+         }
+
+         return existe;
+     }
+        public boolean validarContrasenia(String contrasena) {
+        // Validar longitud mínima
+        if (contrasena.length() < 8) {
+            JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 8 caracteres.", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validar presencia de al menos una letra mayúscula
+        if (!contrasena.matches(".*[A-Z].*")) {
+            JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos una letra mayúscula.", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validar presencia de al menos un número
+        if (!contrasena.matches(".*\\d.*")) {
+            JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos un número.", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validar presencia de al menos un carácter especial
+        if (!contrasena.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
+            JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos un carácter especial.", "Error de Validación", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
 }

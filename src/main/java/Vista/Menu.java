@@ -6,16 +6,11 @@ import Controlador.InfraccionControlador;
 import Controlador.MultasControlador;
 import Controlador.PuntosControlador;
 import Modelo.Infraccion_Multas;
-import Modelo.Usuarios;
 import Modelo.Vehiculo;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import Modelo.Pdfs;
 import Modelo.Propietario;
 import java.awt.Desktop;
@@ -25,11 +20,9 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -447,7 +440,7 @@ private MultasControlador multasControlador = new MultasControlador();
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
             .addComponent(jScrollPane3)
         );
 
@@ -646,7 +639,7 @@ private MultasControlador multasControlador = new MultasControlador();
         );
         jInternalFrame3Layout.setVerticalGroup(
             jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
             .addComponent(jScrollPane4)
             .addGroup(jInternalFrame3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
@@ -941,8 +934,8 @@ private MultasControlador multasControlador = new MultasControlador();
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
-            .addComponent(jPanelContratos, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(jPanelContratos, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("3", jInternalFrame1);
@@ -1064,7 +1057,7 @@ private MultasControlador multasControlador = new MultasControlador();
                 .addComponent(btnCuenca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnAmbato, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         lblPagar_Icono.setBackground(new java.awt.Color(187, 187, 187));
@@ -1093,7 +1086,7 @@ private MultasControlador multasControlador = new MultasControlador();
 
         jTabbedPane1.addTab("4", jInternalFrame5);
 
-        jDesktopPane1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 1490, 670));
+        jDesktopPane1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -20, 1490, 730));
 
         getContentPane().add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 1530, 800));
 
@@ -1232,11 +1225,10 @@ private MultasControlador multasControlador = new MultasControlador();
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btnvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1321,9 +1313,9 @@ private MultasControlador multasControlador = new MultasControlador();
     }//GEN-LAST:event_btnPDFContratoActionPerformed
 
     private void btnNuevaInfraccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaInfraccionActionPerformed
-      int idMulta = multasControlador.getIdMulta(); 
+    int idMulta = multasControlador.getIdMulta(); 
     if (idMulta == 0) {
-        JOptionPane.showMessageDialog(this, "ID de multa no encontrado. Por favor, complete el primer formulario correctamente.");
+        JOptionPane.showMessageDialog(this, "Multa no encontradoa  Por favor, complete el primer formulario correctamente...");
         return;
     }
     
@@ -1360,7 +1352,6 @@ private int calcularPuntosARestar() {
         puntosARestar = Math.min(puntosARestar, 30); 
         
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "El valor ingresado no es válido. Debe ser un número entero.");
     }
     
     return puntosARestar; 
@@ -1413,7 +1404,7 @@ private int calcularPuntosARestar() {
     }//GEN-LAST:event_btnEditarInfraccionActionPerformed
 
     private void btnBuscarInfraccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInfraccionActionPerformed
-buscarInfracciones();
+    buscarInfracciones();
     }//GEN-LAST:event_btnBuscarInfraccionActionPerformed
 private void buscarInfracciones() {
     String cedula = txtIPlacaInfraccion.getText();
@@ -1629,7 +1620,7 @@ private void buscarPuntosLicencia() {
         jTabbedPane1.setSelectedIndex(2);
         
     } catch (SQLException e) {
-        System.out.println("Error SQL al guardar los datos: " + e.getMessage()); // Para depuración
+        System.out.println("Error SQL al guardar los datos: " + e.getMessage()); 
         JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + e.getMessage());
     }
     }//GEN-LAST:event_btnNuevaMultaActionPerformed
@@ -1936,7 +1927,7 @@ private void buscarMultas() {
     }//GEN-LAST:event_txtCitacionActionPerformed
 
     private void btnAmbatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbatoActionPerformed
-int filaSeleccionada = jTableInfraccion.getSelectedRow();
+    int filaSeleccionada = jTableInfraccion.getSelectedRow();
 
     if (filaSeleccionada == -1) {
         JOptionPane.showMessageDialog(this, "Por favor, seleccione la multa que desea pagar.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -2245,7 +2236,6 @@ private void buscarDatosPorPlaca() {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al buscar los datos: " + e.getMessage());
         } finally {
-            // Cerrar recursos
             try {
                 if (res != null) res.close();
                 if (ejecutar != null) ejecutar.close();

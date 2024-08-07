@@ -7,7 +7,7 @@ package Vista;
 import Controlador.Ctrl_Usuarios;
 import Modelo.Consulta_Usuarios;
 import Modelo.Usuarios;
-import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -148,31 +148,44 @@ public class Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
-        // TODO add your handling code here:
-          Usuarios usuarios = new Usuarios();
+        Usuarios usuarios = new Usuarios();
         Consulta_Usuarios consulta_Usuarios = new Consulta_Usuarios();
-        String user,correo,clave;
-        user=this.txtusuario.getText();
-        correo=this.txtcorreo.getText();
-        clave=this.txtcontrasenia.getText();
-        Ctrl_Usuarios ctrl=new Ctrl_Usuarios(usuarios, consulta_Usuarios);
-        if(ctrl.Guardar(user, correo, clave)){
+        String user = this.txtusuario.getText();
+        String correo = this.txtcorreo.getText();
+        String clave = this.txtcontrasenia.getText();
+
+        Ctrl_Usuarios ctrl = new Ctrl_Usuarios(usuarios, consulta_Usuarios);
+        if (!ctrl.validarCorreoEnBD(correo)) {
+            return; 
+        }   
+        
+         if (!ctrl.validarContrasenia(clave)) {
+        return; 
+        }
+
+        if (ctrl.usuarioExiste(user)) {
+            JOptionPane.showMessageDialog(this, "El usuario que utd ingreso ya existe elija otro nombre de usuario.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (ctrl.Guardar(user, correo, clave)) {
             this.txtusuario.setText("");
             this.txtcorreo.setText("");
             this.txtcontrasenia.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo registrar el usuario. Por favor, intente de nuevo.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_btnregistrarActionPerformed
 
+
+
     private void btnvolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvolverActionPerformed
-        // TODO add your handling code here:
         Login login = new Login();
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnvolverActionPerformed
 
     private void txtusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtusuarioMouseClicked
-        // TODO add your handling code here:
          txtusuario.setText("");
     }//GEN-LAST:event_txtusuarioMouseClicked
 

@@ -33,25 +33,7 @@ public class PuntosControlador {
     
     
     
-    
-    ////////////////////////////////////////////////////////////////////////////////  insertarClientes //////////////////////////////////////////////////////////////////////////////////////////////
 
-    
-//    public void insertarClientes(Infraccion_Multas multas) {
-//            try {
-//                String sql = "call InsertarCliente('" + multas.getNombreCli() + "','" + multas.getApellido() + "','" + multas.getTelefono() + "','" + multas.getCedula() + "','" + multas.getDireccion() + "');";
-//                ejecutar = (PreparedStatement) conectar.prepareCall(sql);
-//                var resultado = ejecutar.executeUpdate();
-//                if (resultado > 0) {
-//                    JOptionPane.showMessageDialog(null, "Cliente Creado con Éxito");                
-//                    ejecutar.close();
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Revise los Datos ingresados");
-//                }
-//            } catch (SQLException e) {
-//                System.out.println("ERROR SQL");
-//            }
-//        }
     
     
     
@@ -105,13 +87,8 @@ public ArrayList<Object[]> buscarPuntosLicencia(String cedula) {
     } catch (SQLException e) {
         System.out.println("ERROR SQL al buscar puntos de licencia: " + e.getMessage());
         e.printStackTrace();
-    }
+         }
     return listaObject;
-}
-
-
-
-
-
+    }
 
 }

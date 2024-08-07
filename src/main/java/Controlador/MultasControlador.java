@@ -143,6 +143,7 @@ public int obtenerIdVehiculoPorPlaca(String placa) throws SQLException {
 
 
     /////////////////////////////////////////////////////////////////////////////////////// BUSCAR Multas POR CEDULA O PLACA ///////////////////////////////////////////////////////////////////////////////////////
+ 
 public ArrayList<Object[]> buscarMultas(String cedulaPlaca) {
     ArrayList<Object[]> listaObject = new ArrayList<>();
     try {
