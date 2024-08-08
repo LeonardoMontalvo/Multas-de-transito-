@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Modelo;
 
 import com.itextpdf.text.Document;
@@ -23,30 +27,28 @@ import javax.swing.JOptionPane;
  *
  * @author Leo
  */
-public class Pdfs {
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// PDF DE MULTAS //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public class PDFM {
+           
     
-public static void generarPDF(JTable table, String fileName, String titulo) {
-        Document document = new Document(PageSize.A4);
+    
+        public static void generarPDFM(JTable table, String fileName, String titulo) {
+        String filePath = "C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\PDFS\\" + fileName;
+        Document document = new Document(PageSize.A3);
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileName));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
             document.open();
 
-            // Agregar el logotipo al documento
             Image logo = Image.getInstance("C:\\Users\\Leo\\Documents\\NetBeansProjects\\Multas\\src\\main\\resource\\Imagenes\\Logo_3.jpg");
             logo.scaleToFit(100, 100);
             logo.setAlignment(Element.ALIGN_LEFT);
             document.add(logo);
 
-            // Agregar título al documento
             Paragraph title = new Paragraph(titulo);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
 
             document.add(new Paragraph("\n"));
 
-            // Agregar la tabla al documento
             PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
             for (int i = 0; i < table.getColumnCount(); i++) {
                 pdfTable.addCell(table.getColumnName(i));

@@ -92,7 +92,33 @@ public ArrayList<Object[]> datosInfraccion() {
     return listaObject;
 }
 
-
+public ArrayList<Object[]> datosInfraccionCli() {
+    ArrayList<Object[]> listaObject = new ArrayList<>();
+    try {
+        String sql = "{CALL InfraccionMultas(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)}";
+        CallableStatement ejecutar = conectar.prepareCall(sql);
+        ResultSet res = ejecutar.executeQuery();
+        while (res.next()) {
+            Object[] obInfraccion = new Object[10];
+            obInfraccion[0] = res.getObject("INFRACCION");          
+            obInfraccion[1] = res.getObject("PLACA");             
+            obInfraccion[2] = res.getObject("ENTIDAD");           
+            obInfraccion[3] = res.getObject("CITACION");          
+            obInfraccion[4] = res.getObject("FECHA_NOTIFICACION"); 
+            obInfraccion[5] = res.getObject("FECHA_LIMITE");     
+            obInfraccion[6] = res.getObject("ARTICULOLITERAL");   
+            obInfraccion[7] = res.getObject("FECHA_EMISION");    
+            obInfraccion[8] = res.getObject("TOTAL_PAGAR");       
+            obInfraccion[9] = res.getObject("TIPO");             
+            listaObject.add(obInfraccion);
+        }
+        ejecutar.close();
+    } catch (SQLException e) {
+        System.out.println("ERROR SQL CARGA LISTADO: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return listaObject;
+}
     /////////////////////////////////////////////////////////////////////////////////////// BUSCAR PLACA O CEDULA ///////////////////////////////////////////////////////////////////////////////////////
 
 public ArrayList<Object[]> buscarInfracciones(String cedulaPlaca) {
@@ -121,6 +147,38 @@ public ArrayList<Object[]> buscarInfracciones(String cedulaPlaca) {
     }
     return listaObject;
 }
+
+public ArrayList<Object[]> buscarInfraccionesCli(String cedulaPlaca) {
+    ArrayList<Object[]> listaObject = new ArrayList<>();
+    try {
+        String sql = "{CALL BuscarInfraccionMultasCli(?)}";  
+        CallableStatement stmt = conectar.prepareCall(sql);
+        stmt.setString(1, cedulaPlaca);  
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Object[] obInfracciones = new Object[10];
+            obInfracciones[0] = rs.getObject("INFRACCION");         
+            obInfracciones[1] = rs.getObject("PLACA");              
+            obInfracciones[2] = rs.getObject("ENTIDAD");            
+            obInfracciones[3] = rs.getObject("CITACION");           
+            obInfracciones[4] = rs.getObject("FECHA_NOTIFICACION"); 
+            obInfracciones[5] = rs.getObject("FECHA_LIMITE");       
+            obInfracciones[6] = rs.getObject("ARTICULOLITERAL");    
+            obInfracciones[7] = rs.getObject("FECHA_EMISION");      
+            obInfracciones[8] = rs.getObject("TOTAL_PAGAR");        
+            obInfracciones[9] = rs.getObject("TIPO");              
+            listaObject.add(obInfracciones);
+        }
+        stmt.close();
+    } catch (SQLException e) {
+        System.out.println("ERROR SQL al buscar infracciones: " + e.getMessage());
+        e.printStackTrace();
+    }
+    return listaObject;
+}
+
+
 
     /////////////////////////////////////////////////////////////////////////////////////// EDITAR  ///////////////////////////////////////////////////////////////////////////////////////
 
