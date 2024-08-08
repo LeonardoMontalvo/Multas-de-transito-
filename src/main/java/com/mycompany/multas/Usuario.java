@@ -43,6 +43,8 @@ public class Usuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Rockwell Condensed", 0, 18)); // NOI18N
         jLabel1.setText("REGISTRO");
 
@@ -55,7 +57,9 @@ public class Usuario extends javax.swing.JFrame {
         Contraseña.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         Contraseña.setText("Contraseña");
 
+        btnregistrar.setBackground(new java.awt.Color(102, 102, 102));
         btnregistrar.setFont(new java.awt.Font("Segoe UI Emoji", 0, 18)); // NOI18N
+        btnregistrar.setForeground(new java.awt.Color(255, 255, 255));
         btnregistrar.setText("Registrar");
         btnregistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +67,9 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
 
+        btnvolver.setBackground(new java.awt.Color(102, 102, 102));
         btnvolver.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12)); // NOI18N
+        btnvolver.setForeground(new java.awt.Color(255, 255, 255));
         btnvolver.setText("Volver");
         btnvolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

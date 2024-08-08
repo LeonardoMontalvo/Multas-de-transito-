@@ -41,6 +41,8 @@ public class Recuperacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Rockwell Condensed", 1, 18)); // NOI18N
         jLabel1.setText("RECUPERACION");
 
@@ -52,6 +54,8 @@ public class Recuperacion extends javax.swing.JFrame {
 
         txtenvio.setBackground(new java.awt.Color(242, 242, 242));
 
+        btnenviar.setBackground(new java.awt.Color(102, 102, 102));
+        btnenviar.setForeground(new java.awt.Color(255, 255, 255));
         btnenviar.setText("Enviar");
         btnenviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +63,8 @@ public class Recuperacion extends javax.swing.JFrame {
             }
         });
 
+        btnvolver.setBackground(new java.awt.Color(102, 102, 102));
+        btnvolver.setForeground(new java.awt.Color(255, 255, 255));
         btnvolver.setText("Salir");
         btnvolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
